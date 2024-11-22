@@ -18,10 +18,9 @@
         body {
             font-family: 'Century Gothic', sans-serif;
             line-height: 1.5;
-            margin: 0;
+            margin: auto;
             padding: 20px;
             max-width: 800px;
-            margin: auto;
             background-color: #f4f4f4;
             color: #333;
         }
@@ -93,7 +92,7 @@
         }
         tr{
             :first-child {
-                min-width: 100px;;
+                min-width: 100px;
             }
             :last-child:not(th) p {
                 text-align: justify;
@@ -118,7 +117,14 @@
             h1 { font-size: 2.2em; }
             h2 { font-size: 1.1em; }
             h3 { font-size: 1em; }
-            tr { font-size: 0.8em;}
+            tr { font-size: 0.8em;
+                :first-child {
+                    min-width: unset;
+                }
+            }
+            td + td {
+                padding: unset;
+            }
         }
         @media print {
             h1 { font-size: 36px; }
