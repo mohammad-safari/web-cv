@@ -1,0 +1,51 @@
+@import "https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined&display=swap&icon_names=arrow_upward,computer,diversity_3,emoji_events,menu_book,mic,person,school,science,sports_soccer,translate,work,workspace_premium&text=";
+
+nav {
+    display: flex;
+    position: sticky;
+    inset-block-start: -200px;
+    z-index: 1;
+    justify-content: flex-end; /* trick for back to top goto * */
+    flex-wrap: wrap;
+    gap: 0.5em;
+    
+    a {
+        margin-inline-start: auto; /* trick * */
+        padding: 0.3em 0.3em;
+        text-decoration: none;
+
+        /* cls prevention */
+        max-width: 24px; 
+        max-height: 24px; 
+        overflow: hidden;
+    
+        @media (max-width: 600px) { 
+            padding: 0.6em 0.6em;
+            gap: 1em;
+        }
+    }
+    @media print{ display: none; }
+}
+.material-symbols-outlined {
+    font-family: 'Material Symbols Outlined';
+    font-variation-settings:
+    'FILL' 0,
+    'wght' 400,
+    'GRAD' 0,
+    'opsz' 20;
+}
+.back-to-top {
+    border-radius: 50%;
+    font-size: 24px;
+    display: flex;
+    align-self: end;
+    margin-block-end: -105vh;
+
+    transition: background 0.3s;
+    background-color: var(--main-color);
+    color: var(--bg-color);
+    &:hover {
+        background-color: var(--bg-color);
+        color: var(--secondary-color);
+    }
+}
