@@ -69,35 +69,39 @@
     </script>
 
     <style>
+        :root {
+            color-scheme: light dark;
+            --main-color: light-dark(#333, #ddd);
+            --secondary-color: light-dark(#555, #bbb);
+            --nav-color: light-dark(darkblue, lightblue);
+            --bg-color: light-dark(#f4f4f4, #0c0c0c);
+        }
         body {
             font-family: 'Century Gothic', sans-serif;
             line-height: 1.5;
             margin: auto;
             padding: 20px;
             max-width: 800px;
-            background-color: #f4f4f4;
-            color: #333;
+            background-color: var(--bg-color);
+            color: var(--main-color);
         }
         header {
             text-align: start;
-            margin-bottom: 20px;
-            &>section {
+            margin-block-end: -100px;
+            & > section {
                 font-size: 0.7em;
                 display: grid;
                 gap: 10px;
                 grid-template-columns: 1fr 1fr 2fr;
                 
-                :last-child {
-                    justify-self: end;
-                }
+                :last-child { justify-self: end; }
             }
-            margin-bottom: -100px;
         }
         header::after {
                 content: "";
                 position: relative;
-                top: -115px;
-                right: -85%;
+                inset-block-start: -115px;
+                inset-inline-end: -85%;
 
                 display: inline-block;
                 height: 100px;
@@ -108,87 +112,69 @@
         }
         h1 {
             font-size: 3em;
-            font-weight: 150;
+            font-weight: lighter;
             margin: 0;
         }
         h2 {
             font-size: 1.5em;
             margin: 10px 0;
 
-            position:sticky;
-            top:0;
-            background-color: #f4f4f4;
-
-            h1 + & {
-                font-weight: 50;
+            section & {
+                position: sticky;
+                inset-block-start: 0;
+                /* sticky behavior needs header to have back color on content */
+                background: linear-gradient(-45deg, color-mix(in srgb, var(--bg-color), transparent 95%), var(--bg-color) 85%);
             }
+            h1 + & { font-weight: lighter; }
         }
         h3 {
             font-size: 1.2em;
             margin: 5px 0;
             font-weight: normal;
         }
-        p {
-            margin: 5px 0;
-        }
+        p { margin: 5px 0; }
         a {
-            color: blue;
+            color: var(--nav-color);
             text-decoration: none;
         }
-        a:hover {
-            text-decoration: underline;
-        }
+        ::not(nav) a:hover { text-decoration: underline; }
         table {
             width: 100%;
             /* border-collapse: collapse; */
-            margin-bottom: 20px;
-            border-bottom: 1px solid #555;
+            margin-block-end: 20px;
+            border-block-end: 1px solid var(--secondary-color);
         }
-        tr{
-            :first-child {
-                min-width: 100px;
-            }
-            :last-child:not(th) p {
-                text-align: justify;
-            }
-        }
+        td > td:first-child { min-width: 100px; }
+        td > td:last-child:not(th) p { text-align: justify; }
         td {
             padding: 10px;
             vertical-align: top;
-            border-bottom: 1px solid #ddd;
-            
+            border-block-end: 1px solid var(--bg-color);
         }
         @media (max-width: 600px) {
             header {
-                & >h1, & >h2 {
-                width: 50%;
-                }
-                &::after {
-                top: -160px;
-                right: -70%;
-                }
+                    & > h1, & > h2 { width: 50%; }
+                    &::after { 
+                        inset-block-start: -160px; 
+                        inset-inline-end: -70%;
+                    }
             }
             h1 { font-size: 2.2em; }
             h2 { font-size: 1.1em; }
             h3 { font-size: 1em; }
             tr { font-size: 0.8em;
-                :first-child {
-                    min-width: unset;
-                }
+                :first-child { min-width: unset; }
             }
-            td + td {
-                padding: unset;
-            }
+            td + td { padding: unset; }
         }
         @media print {
+            body { background-color: unset; }
             h1 { font-size: 36px; }
             h2 { font-size: 16px; }
             h3 { font-size: 12px; }
-            header >section {
-                font-size: 0.5em;
-            }
+            header > section { font-size: 0.5em; }
             tr { font-size: 9px;}
-            img { visibility: hidden;}
+            header::after { background-image: none; }
         }
     </style>
 </head>
